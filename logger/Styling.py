@@ -1,0 +1,6 @@
+bold = "\33[1m"
+italic = "\33[3m"
+url = "\33[4m"
+blink = "\33[5m"
+underline = "\u001b[4m"
+reversed = "\u001b[7m"

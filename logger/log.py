@@ -1,74 +1,48 @@
-import sys
-import os
 from datetime import datetime
 from pathlib import Path
+from . import FGColor, Styling, BGColor
 
-os.system("")
-
-reset = "\u001b[0m"
-
-class Styling:
-    bold = "\33[1m"
-    italic = "\33[3m"
-    url = "\33[4m"
-    blink = "\33[5m"
-    underline = "\u001b[4m"
-    reversed = "\u001b[7m"
-
-
-class Color:
-    black = "\u001b[38;5;0m"
-    gray = "\u001b[38;5;8m"
-    red = "\u001b[38;5;9m"
-    green = "\u001b[38;5;10m"
-    yellow = "\u001b[38;5;11m"
-    blue = "\u001b[38;5;12m"
-    purple = "\u001b[38;5;13m"
-    cyan = "\u001b[38;5;14m"
-    white = "\u001b[38;5;15m"
-
-
-class BGColor:
-    bg_black = "\u001b[48;5;0m"
-    bg_gray = "\u001b[48;5;8m"
-    bg_red = "\u001b[48;5;9m"
-    bg_green = "\u001b[48;5;10m"
-    bg_yellow = "\u001b[48;5;11m"
-    bg_blue = "\u001b[48;5;12m"
-    bg_purple = "\u001b[48;5;13m"
-    bg_cyan = "\u001b[48;5;14m"
-    bg_white = "\u001b[48;5;15m"
+RESET = "\u001b[0m"
 
 
 logger_options = {
     "save_to_file": False,
     "log_path": Path.cwd(),
     "log_timestamp_format": "[%Y-%m-%d %H:%M:%S]",
+    "is_timestamp_enabled": False
 }
 
 
-def ERROR(text):
-    print(reset + Color.red + Styling.bold + "[-] Error: " + reset + text + reset)
+def error(text):
+    if logger_options["is_timestamp_enabled"]:
+        time = datetime.now()
+        t_format = time.strftime(logger_options["log_timestamp_format"])
+        print(f"{RESET}{FGColor.red}{Styling.bold}{t_format}[-] Error: {RESET}{text}{RESET}")
+    else:
+        print(f"{RESET}{FGColor.red}{Styling.bold}[-] Error: {RESET}{text}{RESET}")
     if logger_options["save_to_file"]:
         save_to_txt(logger_options["log_path"], "Error", text)
 
 
-def WARNING(text):
-    print(reset + Color.yellow + Styling.bold + "[!] Warning: " + reset + text + reset)
+def warning(text):
+    print(f"{RESET}{FGColor.yellow}{Styling.bold}[!] Warning: {RESET}{text}{RESET}")
     if logger_options["save_to_file"]:
         save_to_txt(logger_options["log_path"], "Warn", text)
 
 
-def INFO(text):
-    print(reset + Color.blue + Styling.bold + "[?] Info: " + reset + text + reset)
+def info(text):
+    print(f"{RESET}{FGColor.blue}{Styling.bold}[?] Info: {RESET}{text}{RESET}")
     if logger_options["save_to_file"]:
         save_to_txt(logger_options["log_path"], "Info", text)
 
 
-def SUCCESS(text):
-    print(reset + Color.green + Styling.bold + "[+] Success: " + reset + text + reset)
+def success(text):
+    print(f"{RESET}{FGColor.green}{Styling.bold}[+] Success: {RESET}{text}{RESET}")
     if logger_options["save_to_file"]:
         save_to_txt(logger_options["log_path"], "Success", text)
+
+def critical(text):
+    pass
 
 
 def enable_save_to_txt(path=""):
@@ -95,6 +69,12 @@ def save_to_txt(path, type, message):
 
 def set_log_timestamp_format(format: str):
     logger_options["log_timestamp_format"] = format
+
+def enable_timestamp():
+    logger_options["is_timestamp_enabled"] = True
+
+def disablke_timestamp():
+    logger_options["is_timestamp_enabled"] = False
 
 
 def setCustomColor(number):

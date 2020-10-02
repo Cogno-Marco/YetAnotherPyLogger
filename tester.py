@@ -11,15 +11,17 @@ log.SUCCESS("Everything is working fine")
 log.INFO("Something is working...")
 
 log.enable_save_to_txt(Path.cwd())
+log.enable_timestamp()
 
 log.INFO("Some text")
+log.ERROR("Some error")
 
 log.set_log_timestamp_format("[%H:%M]")
 
 log.INFO("Other text")
 
 #print(RESET + BACK_BLUE + "Some Text")
-print(log.reset)
+print(log.RESET)
 
 
 # example API usage

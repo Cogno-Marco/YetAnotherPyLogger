@@ -1,0 +1,5 @@
+[2020-10-02 14:32:33] - Info: Some text
+[14:32] - Info: Other text
+[2020-10-02 14:44:22] - Info: Some text
+[2020-10-02 14:44:22] - Error: Some error
+[14:44] - Info: Other text
