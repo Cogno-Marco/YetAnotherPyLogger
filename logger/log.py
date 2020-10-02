@@ -1,6 +1,7 @@
 from datetime import datetime
 from pathlib import Path
 from . import FGColor, Styling, BGColor
+import os
 
 RESET = "\u001b[0m"
 
@@ -8,6 +9,7 @@ RESET = "\u001b[0m"
 logger_options = {
     "save_to_file": False,
     "log_path": Path.cwd(),
+    "log_file_name": "logs.txt",
     "log_timestamp_format": "[%Y-%m-%d %H:%M:%S]",
     "is_timestamp_enabled": False
 }
@@ -27,7 +29,13 @@ def _general_log(color, intro_text, full_text):
     else:
         print(f"{RESET}{color}{Styling.bold}{intro_text}{RESET}{full_text}{RESET}")
     if logger_options["save_to_file"]:
-        save_to_txt(logger_options["log_path"], {intro_text}, full_text)
+        if logger_options["is_timestamp_enabled"]:
+            time = datetime.now()
+            t_format = time.strftime(logger_options["log_timestamp_format"])
+            _save_to_txt(f"{t_format}{intro_text}{full_text}\n")
+        else:
+            _save_to_txt(f"{intro_text}{full_text}\n")
+    
 
 
 def error(text):
@@ -72,29 +80,22 @@ def enable_save_to_txt(name="logs.txt", path=""):
     param [name]: name of the file to save logs in, if empty or None defaults to "logs.txt"
     param [path]: path to save the file in, if empty or None path is default
     """
-    if path != "":
+    
+    if name != "" or name != None:
+        logger_options["log_file_name"] = name
+    if path != "" or path != None:
         logger_options["log_path"] = path
 
     logger_options["save_to_file"] = True
 
 def disable_save_to_txt():
     """disables file saving logs"""
-    pass
+    logger_options["save_to_file"] = False
 
 
-def save_to_txt(path, type, message):
-    time = datetime.now()
-    text = (
-        time.strftime(logger_options["log_timestamp_format"])
-        + " - "
-        + type.capitalize()
-        + ": "
-        + message
-        + "\n"
-    )
-
-    file = open(Path.joinpath(logger_options["log_path"], "logs.txt"), "a+")
-    file.write(text)
+def _save_to_txt(text):
+    with open(os.path.join(logger_options["log_path"], logger_options["log_file_name"]), "a+") as f:
+        f.write(text)
 
 
 def set_log_timestamp_format(format: str):

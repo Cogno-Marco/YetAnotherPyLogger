@@ -1,0 +1,4 @@
+[?] Info: testing info clean
+[-] Error: testing error clean
+[!] Warning: testing warning clean
+[+] Success: testing success clean
