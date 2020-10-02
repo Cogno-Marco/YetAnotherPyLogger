@@ -13,33 +13,50 @@ logger_options = {
 }
 
 
-def error(text):
+def _general_log(color, intro_text, full_text):
+    """general function used to print logs, used by other funnctions to avoid repetition
+
+    :param [color]: color to wrte the text in
+    :param [intro_text]: intro text displayed in color
+    :param [text]: text to log to screen or to file
+    """
     if logger_options["is_timestamp_enabled"]:
         time = datetime.now()
         t_format = time.strftime(logger_options["log_timestamp_format"])
-        print(f"{RESET}{FGColor.red}{Styling.bold}{t_format}[-] Error: {RESET}{text}{RESET}")
+        print(f"{RESET}{color}{Styling.bold}{t_format}{intro_text}{RESET}{full_text}{RESET}")
     else:
-        print(f"{RESET}{FGColor.red}{Styling.bold}[-] Error: {RESET}{text}{RESET}")
+        print(f"{RESET}{color}{Styling.bold}{intro_text}{RESET}{full_text}{RESET}")
     if logger_options["save_to_file"]:
-        save_to_txt(logger_options["log_path"], "Error", text)
+        save_to_txt(logger_options["log_path"], {intro_text}, full_text)
 
+
+def error(text):
+    """prints an error level message
+    
+    :param [text]: text to print to consol and to file(if enabled)
+    """
+    _general_log(FGColor.red, "[-] Error: ", text)
 
 def warning(text):
-    print(f"{RESET}{FGColor.yellow}{Styling.bold}[!] Warning: {RESET}{text}{RESET}")
-    if logger_options["save_to_file"]:
-        save_to_txt(logger_options["log_path"], "Warn", text)
-
+    """prints a warning level message
+    
+    :param [text]: text to print to consol and to file(if enabled)
+    """
+    _general_log(FGColor.yellow, "[!] Warning: ", text)
 
 def info(text):
-    print(f"{RESET}{FGColor.blue}{Styling.bold}[?] Info: {RESET}{text}{RESET}")
-    if logger_options["save_to_file"]:
-        save_to_txt(logger_options["log_path"], "Info", text)
-
+    """prints an info level message
+    
+    :param [text]: text to print to consol and to file(if enabled)
+    """
+    _general_log(FGColor.blue, "[?] Info: ", text)
 
 def success(text):
-    print(f"{RESET}{FGColor.green}{Styling.bold}[+] Success: {RESET}{text}{RESET}")
-    if logger_options["save_to_file"]:
-        save_to_txt(logger_options["log_path"], "Success", text)
+    """prints a success level message
+    
+    :param [text]: text to print to consol and to file(if enabled)
+    """
+    _general_log(FGColor.green, "[+] Success: ", text)
 
 def critical(text):
     pass
@@ -50,6 +67,9 @@ def enable_save_to_txt(path=""):
         logger_options["log_path"] = path
 
     logger_options["save_to_file"] = True
+
+def disable_save_to_txt():
+    pass
 
 
 def save_to_txt(path, type, message):
@@ -73,7 +93,7 @@ def set_log_timestamp_format(format: str):
 def enable_timestamp():
     logger_options["is_timestamp_enabled"] = True
 
-def disablke_timestamp():
+def disable_timestamp():
     logger_options["is_timestamp_enabled"] = False
 
 
