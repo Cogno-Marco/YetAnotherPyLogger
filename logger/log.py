@@ -33,32 +33,36 @@ def _general_log(color, intro_text, full_text):
 def error(text):
     """prints an error level message
     
-    :param [text]: text to print to consol and to file(if enabled)
+    :param [text]: text to print to console and to file(if enabled)
     """
     _general_log(FGColor.red, "[-] Error: ", text)
 
 def warning(text):
     """prints a warning level message
     
-    :param [text]: text to print to consol and to file(if enabled)
+    :param [text]: text to print to console and to file(if enabled)
     """
     _general_log(FGColor.yellow, "[!] Warning: ", text)
 
 def info(text):
     """prints an info level message
     
-    :param [text]: text to print to consol and to file(if enabled)
+    :param [text]: text to print to console and to file(if enabled)
     """
     _general_log(FGColor.blue, "[?] Info: ", text)
 
 def success(text):
     """prints a success level message
     
-    :param [text]: text to print to consol and to file(if enabled)
+    :param [text]: text to print to console and to file(if enabled)
     """
     _general_log(FGColor.green, "[+] Success: ", text)
 
 def critical(text):
+    """prints a critical level message
+    
+    :param [text]: text to print to console and to file(if enabled)
+    """
     pass
 
 
