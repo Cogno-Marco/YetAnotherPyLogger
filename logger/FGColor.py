@@ -7,3 +7,6 @@ blue = "\u001b[38;5;12m"
 purple = "\u001b[38;5;13m"
 cyan = "\u001b[38;5;14m"
 white = "\u001b[38;5;15m"
+
+def customColor(number):
+    print(f"\u001b[38;5;{number}m")

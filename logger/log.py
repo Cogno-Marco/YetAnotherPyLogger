@@ -66,13 +66,19 @@ def critical(text):
     pass
 
 
-def enable_save_to_txt(path=""):
+def enable_save_to_txt(name="logs.txt", path=""):
+    """enables saving logs to file, but with disabled colors
+    
+    param [name]: name of the file to save logs in, if empty or None defaults to "logs.txt"
+    param [path]: path to save the file in, if empty or None path is default
+    """
     if path != "":
         logger_options["log_path"] = path
 
     logger_options["save_to_file"] = True
 
 def disable_save_to_txt():
+    """disables file saving logs"""
     pass
 
 
@@ -95,15 +101,14 @@ def set_log_timestamp_format(format: str):
     logger_options["log_timestamp_format"] = format
 
 def enable_timestamp():
+    """enables timestamps into logs, 
+    see set_log_timestamp_format to change the format of the timestamp
+    """
     logger_options["is_timestamp_enabled"] = True
 
 def disable_timestamp():
+    """disables timestamps into logs"""
     logger_options["is_timestamp_enabled"] = False
 
 
-def setCustomColor(number):
-    print(f"\u001b[38;5;{number}m")
 
-
-def setCustomBGColor(number):
-    print(f"\u001b[48;5;{number}m")

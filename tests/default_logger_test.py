@@ -17,6 +17,7 @@ class TestLogMethods(unittest.TestCase):
     
     def setUp(self) -> None:
         log.disable_timestamp()
+        log.disable_save_to_txt()
     
     def test_info_as_expected(self):
         expected_log = f"{self.RESET}{self.BLUE}{self.BOLD}[?] Info: {self.RESET}{self.TEXT}{self.RESET}\n"

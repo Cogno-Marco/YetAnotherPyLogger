@@ -7,3 +7,6 @@ bg_blue = "\u001b[48;5;12m"
 bg_purple = "\u001b[48;5;13m"
 bg_cyan = "\u001b[48;5;14m"
 bg_white = "\u001b[48;5;15m"
+
+def customColor(number):
+    print(f"\u001b[48;5;{number}m")
