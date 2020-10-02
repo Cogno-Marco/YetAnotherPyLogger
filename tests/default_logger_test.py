@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import patch 
 from io import StringIO
 from logger import log
+from datetime import datetime
 
 
 class TestLogMethods(unittest.TestCase):
@@ -42,6 +43,54 @@ class TestLogMethods(unittest.TestCase):
         with patch('sys.stdout', new = StringIO()) as fake_out: 
             log.success(self.TEXT)
             self.assertEqual(fake_out.getvalue(), expected_log) 
+    
+    def test_info_timestamp_as_expected(self):
+        log.enable_timestamp()
+        time_format = "[%Y-%m-%d %H:%M:%S]"
+        
+        time = datetime.now()
+        time_formatted = time.strftime(time_format)
+        
+        expected_log = f"{self.RESET}{self.BLUE}{self.BOLD}{time_formatted}[?] Info: {self.RESET}{self.TEXT}{self.RESET}\n"
+        with patch('sys.stdout', new = StringIO()) as fake_out: 
+            log.info(self.TEXT)
+            self.assertEqual(fake_out.getvalue(), expected_log)
+    
+    def test_warning_timestamp_as_expected(self):
+        log.enable_timestamp()
+        time_format = "[%Y-%m-%d %H:%M:%S]"
+        
+        time = datetime.now()
+        time_formatted = time.strftime(time_format)
+        
+        expected_log = f"{self.RESET}{self.YELLOW}{self.BOLD}{time_formatted}[!] Warning: {self.RESET}{self.TEXT}{self.RESET}\n"
+        with patch('sys.stdout', new = StringIO()) as fake_out: 
+            log.warning(self.TEXT)
+            self.assertEqual(fake_out.getvalue(), expected_log)
+    
+    def test_error_timestamp_as_expected(self):
+        log.enable_timestamp()
+        time_format = "[%Y-%m-%d %H:%M:%S]"
+        
+        time = datetime.now()
+        time_formatted = time.strftime(time_format)
+        
+        expected_log = f"{self.RESET}{self.RED}{self.BOLD}{time_formatted}[-] Error: {self.RESET}{self.TEXT}{self.RESET}\n"
+        with patch('sys.stdout', new = StringIO()) as fake_out: 
+            log.error(self.TEXT)
+            self.assertEqual(fake_out.getvalue(), expected_log)
+    
+    def test_success_timestamp_as_expected(self):
+        log.enable_timestamp()
+        time_format = "[%Y-%m-%d %H:%M:%S]"
+        
+        time = datetime.now()
+        time_formatted = time.strftime(time_format)
+        
+        expected_log = f"{self.RESET}{self.GREEN}{self.BOLD}{time_formatted}[+] Success: {self.RESET}{self.TEXT}{self.RESET}\n"
+        with patch('sys.stdout', new = StringIO()) as fake_out: 
+            log.success(self.TEXT)
+            self.assertEqual(fake_out.getvalue(), expected_log)
             
 if __name__ == '__main__':
     unittest.main()
