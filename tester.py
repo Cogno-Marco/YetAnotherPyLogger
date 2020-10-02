@@ -5,20 +5,20 @@ from pathlib import Path
 # print(BOLD + "Hola")
 # print(UNDERLINE + "Hola" + RESET)
 
-log.ERROR("An Error Occurred Unexpectedly")
-log.WARNING("Something strange is happening")
-log.SUCCESS("Everything is working fine")
-log.INFO("Something is working...")
+log.error("An Error Occurred Unexpectedly")
+log.warning("Something strange is happening")
+log.success("Everything is working fine")
+log.info("Something is working...")
 
 log.enable_save_to_txt(Path.cwd())
 log.enable_timestamp()
 
-log.INFO("Some text")
-log.ERROR("Some error")
+log.info("Some text")
+log.error("Some error")
 
 log.set_log_timestamp_format("[%H:%M]")
 
-log.INFO("Other text")
+log.info("Other text")
 
 #print(RESET + BACK_BLUE + "Some Text")
 print(log.RESET)
