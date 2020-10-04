@@ -39,6 +39,7 @@ def _general_log(color, intro_text, full_text):
 
 
 def error(text):
+    # TODO: add more inputs
     """prints an error level message
     
     :param [text]: text to print to console and to file(if enabled)
