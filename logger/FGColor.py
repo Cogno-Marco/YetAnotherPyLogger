@@ -1,4 +1,5 @@
 black = "\u001b[38;5;0m"
+magenta = "\u001b[35;1m"
 gray = "\u001b[38;5;8m"
 red = "\u001b[38;5;9m"
 green = "\u001b[38;5;10m"

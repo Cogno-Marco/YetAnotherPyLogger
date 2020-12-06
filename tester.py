@@ -1,5 +1,6 @@
 from logger import log
 from pathlib import Path
+from logger import FGColor
 
 # print(REVERSED + "Hola" + RESET)
 # print(BOLD + "Hola")
@@ -20,8 +21,15 @@ log.set_log_timestamp_format("[%H:%M]")
 
 log.info("Other text")
 
-#print(RESET + BACK_BLUE + "Some Text")
-print(log.RESET)
+log.color(FGColor.red,      " .----------------. ")
+log.color(FGColor.green,    "|          _       |")
+log.color(FGColor.yellow,   "|      _.-'|'-._   |")
+log.color(FGColor.blue,     "| .__.|    |    |  |")
+log.color(FGColor.magenta,  "|     |_.-'|'-._|  |")
+log.color(FGColor.cyan,     "| '--'|    |    |  |")
+log.color(FGColor.white,    "| '--'|_.-'`'-._|  |")
+log.color(FGColor.red,      "| '--'          `  |")
+log.color(FGColor.green,    " '----------------'")
 
 
 # example API usage

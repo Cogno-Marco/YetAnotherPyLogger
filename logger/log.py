@@ -25,8 +25,7 @@ def _general_log(color, intro_text, full_text):
     if logger_options["is_timestamp_enabled"]:
         time = datetime.now()
         t_format = time.strftime(logger_options["log_timestamp_format"])
-        print(
-            f"{RESET}{color}{Styling.bold}{t_format}{intro_text}{RESET}{full_text}{RESET}")
+        print(f"{RESET}{color}{Styling.bold}{t_format}{intro_text}{RESET}{full_text}{RESET}")
     else:
         print(f"{RESET}{color}{Styling.bold}{intro_text}{RESET}{full_text}{RESET}")
     if logger_options["save_to_file"]:
@@ -78,6 +77,11 @@ def critical(text):
     """
     pass
 
+def color(color, *text, sep=" ", end="\n"):
+    print(f"{RESET}{color}", end="")
+    for i in text:
+        print(i, end=sep)
+    print(RESET, end=end)
 
 def enable_save_to_txt(name="logs.txt", path=""):
     """enables saving logs to file, but with disabled colors
