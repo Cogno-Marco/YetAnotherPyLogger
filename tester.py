@@ -10,7 +10,7 @@ log.warning("Something strange is happening")
 log.success("Everything is working fine")
 log.info("Something is working...")
 
-log.enable_save_to_txt(Path.cwd())
+log.enable_save_to_txt(path=Path.cwd())
 log.enable_timestamp()
 
 log.info("Some text")
